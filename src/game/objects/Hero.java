@@ -12,12 +12,12 @@ import main.DinoGame;
 public class Hero extends GameObject {
 	public static final double radius = 20;
 	private static Color fill = new Color(0, 0, 0, 1);
-	double x;
-	double y;
+	double yTrack;
 	double velY;
 	int points = 0;
+	long last = 0;
 	private DinoGame dinoGame;
-	private boolean touchingGround; // or platform
+	private boolean touchingGround; // or platform 1 = touching, 2 = submerge
 	private boolean needsJump = false;
 
 	public Hero(DinoGame dinoGame) {
@@ -29,6 +29,7 @@ public class Hero extends GameObject {
 		this.x = x;
 		this.y = y;
 		velY = 0;
+		yTrack = y;
 	}
 
 	public double getY() {
@@ -43,7 +44,7 @@ public class Hero extends GameObject {
 	public void render(Canvas canvas) {
 		final GraphicsContext graphics = canvas.getGraphicsContext2D();
 		graphics.setFill(fill);
-		graphics.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+		graphics.fillOval(x - radius, yTrack - radius, 2 * radius, 2 * radius);
 	}
 
 	public void jump() {
@@ -56,16 +57,21 @@ public class Hero extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero, long now) {
-		if (touchingGround) {
+		long diff = now - last;
+		last = now;
+
+		int m = dinoGame.getFloor().multiplier();
+
+		if (touchingGround && velY * m > 0) {
 			velY = 0;
-			y = -radius;
+			y = m * -radius;
 		} else {
-			velY++;
+			velY += (y < 0 ? 1 : -1) * diff / 10000000;
 		}
 
 		if (needsJump) {
 			if (touchingGround) {
-				velY = -10;
+				velY = m * -10;
 			}
 			needsJump = false;
 		}
@@ -73,11 +79,9 @@ public class Hero extends GameObject {
 		x = ((double) now) / 2000000;
 		y += velY;
 
-		return true;
-	}
+		yTrack += ((y - yTrack) / 2 * Math.max(diff / 1000000000, 1));
 
-	private int multiplier() {
-		return dinoGame.getFloor().isFlipped() ? 1 : -1;
+		return true;
 	}
 
 	public void announceContact() {
