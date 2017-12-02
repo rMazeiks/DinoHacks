@@ -86,7 +86,7 @@ public class Hero extends GameObject {
 		x = ((double) now) / 2000000;
 		y += velY;
 
-		yTrack += ((y - yTrack) / 2 * Math.max(diff / 1000000000, 1));
+		yTrack += ((y - yTrack) / 2 * Math.min(Math.max(diff / 10000000, -1), 1));
 
 		return true;
 	}
