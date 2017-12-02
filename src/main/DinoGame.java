@@ -3,8 +3,11 @@ package main;
 import game.GameObject;
 import game.objects.Hero;
 import game.objects.Floor;
+import game.objects.Point;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,17 +39,28 @@ public class DinoGame extends AnimationTimer {
 		return hero;
 	}
 
+	int count = 0;
 	@Override
 	public void handle(long now) {
+	    count++;
+	    if(count%360==0) {
+            gameObjects.add(new Point(hero.getX() + Math.random() * 200 + 300, Math.random()*-150 -50));
+        }
 
-		for (int i = 0; i < gameObjects.size(); i++) {
-			canvas.getGraphicsContext2D().save();
+       GraphicsContext graphics =  canvas.getGraphicsContext2D();
+
+        graphics.setFill(new Color(1,1,1,1));
+        graphics.fillRect(0,-canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+
+        graphics.save();
+        graphics.translate(100 - hero.getX(), 0);
+
+
+
+        for (int i = 0; i < gameObjects.size(); i++) {
 
 			GameObject obj = gameObjects.get(i);
-			if (obj instanceof Floor) {
-			} else {
-				canvas.getGraphicsContext2D().translate(100 - hero.getX(), 0);
-			}
+
 
 			if (!obj.interact(hero)) {
 				gameObjects.remove(i);
@@ -55,9 +69,12 @@ public class DinoGame extends AnimationTimer {
 				obj.render(canvas);
 			}
 
-			canvas.getGraphicsContext2D().restore();
 		}
 
-		floor.render(canvas);
+
+
+        graphics.restore();
+
+        floor.render(canvas);
 	}
 }

@@ -41,6 +41,7 @@ public class Hero extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero) {
+		x = x+0.4;
 		return true;
 	}
 }
