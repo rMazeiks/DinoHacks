@@ -14,8 +14,14 @@ public class Hero extends GameObject {
 	private static Color fill = new Color(0, 0, 0, 1);
 	double yTrack;
 	double velY;
+
+	public int getPoints() {
+		return points;
+	}
+
 	int points = 0;
 	long last = 0;
+	boolean firstIteration = true;
 	private DinoGame dinoGame;
 	private boolean touchingGround; // or platform 1 = touching, 2 = submerge
 	private boolean needsJump = false;
@@ -57,7 +63,8 @@ public class Hero extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero, long now) {
-		long diff = now - last;
+		long diff = firstIteration ? 0 : now - last;
+		firstIteration = false;
 		last = now;
 
 		int m = dinoGame.getFloor().multiplier();
@@ -71,7 +78,7 @@ public class Hero extends GameObject {
 
 		if (needsJump) {
 			if (touchingGround) {
-				velY = m * -10;
+				velY = m * -12;
 			}
 			needsJump = false;
 		}
@@ -93,7 +100,7 @@ public class Hero extends GameObject {
 
 	}
 
-	public void getPoint() {
+	public void receivePoint() {
 		points++;
 		System.out.println("points: " + points);
 	}
