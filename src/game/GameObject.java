@@ -1,12 +1,10 @@
 package game;
 
-import javafx.scene.canvas.GraphicsContext;
-
 /**
  * Created by 18rmazeiks
  */
-public interface GameObject {
-	void render(GraphicsContext graphics);
+public abstract class GameObject implements Renderable {
+	double x, y;
 
-
+	public abstract void interact(Hero hero);
 }

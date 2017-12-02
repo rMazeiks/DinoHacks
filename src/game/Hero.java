@@ -1,13 +1,16 @@
 package game;
 
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  * Created by 18rmazeiks
  */
-public class Hero {
+public class Hero implements Renderable{
 	double x, y;
 	double velY;
 
-	void render()  {
+	@Override
+	public void render(GraphicsContext graphics) {
 
 	}
 }
