@@ -44,7 +44,7 @@ public class DinoGame extends AnimationTimer {
 	public void handle(long now) {
 	    count++;
 	    if(count%360==0) {
-            gameObjects.add(new Point(hero.getX() + Math.random() * 200 + 300, Math.random()*-150 -50));
+            gameObjects.add(new Point(hero.getX() + Math.random() * 200 + 300, Math.random()*-50 - 25));
         }
 
        GraphicsContext graphics =  canvas.getGraphicsContext2D();

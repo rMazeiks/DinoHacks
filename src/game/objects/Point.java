@@ -12,8 +12,8 @@ public class Point extends GameObject {
 	@Override
 	public void render(Canvas canvas) {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
-        graphics.setFill(new Color(0,0,0,1));
-        graphics.fillOval(x,y,50,50);
+        graphics.setFill(new Color(1,0.5,0,1));
+        graphics.fillOval(x,y,15,25);
     }
 
 	public Point(double x, double y){
@@ -23,8 +23,9 @@ public class Point extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero) {
-        if (Math.hypot(Math.abs(x-hero.getX()),Math.abs(y-hero.getY())) < 0.1) {
-            System.out.println("touching coin");
+        if (Math.hypot(x-hero.getX(),y-hero.getY()) < 40) {
+            hero.getPoint();
+            return false;
         }
 		return true;
 	}

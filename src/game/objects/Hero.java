@@ -14,6 +14,7 @@ public class Hero extends GameObject {
 	double x;
 	double y;
 	double velY;
+	int points = 0;
 
 	public double getY() {
 		return y;
@@ -41,7 +42,12 @@ public class Hero extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero) {
-		x = x+0.4;
+		x = x+0.2;
 		return true;
+	}
+
+	public void getPoint()  {
+		points++;
+		System.out.println("points: "+points);
 	}
 }
