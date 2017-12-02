@@ -11,7 +11,6 @@ import javafx.stage.Stage;
  * The main class that creates a window
  */
 public class Main extends Application {
-	GraphicsContext gc;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -19,8 +18,7 @@ public class Main extends Application {
 		StackPane root = new StackPane();
 
 		final Canvas canvas = new Canvas(250, 250);
-		gc = canvas.getGraphicsContext2D();
-
+		GraphicsContext gc = canvas.getGraphicsContext2D();
 		root.getChildren().add(canvas);
 
 		primaryStage.setTitle("Dino");
@@ -28,9 +26,7 @@ public class Main extends Application {
 		primaryStage.setScene(new Scene(root, 300, 275));
 		primaryStage.show();
 
-		GameRunner runner = new GameRunner();
+		DinoGame runner = new DinoGame(canvas);
 		runner.run();
 	}
-
-
 }
