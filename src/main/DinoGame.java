@@ -3,6 +3,7 @@ package main;
 import game.GameObject;
 import game.objects.Floor;
 import game.objects.Hero;
+import game.objects.Platform;
 import game.objects.Point;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -20,8 +21,8 @@ public class DinoGame extends AnimationTimer {
 	private final Canvas canvas;
 	private final Floor floor;
 	private final List<GameObject> gameObjects;
-	int count = 0;
-	long next = 0;
+    long next = 0;
+    int count = 0;
 	private Hero hero;
 
 	public DinoGame(Canvas canvas) {
@@ -49,6 +50,10 @@ public class DinoGame extends AnimationTimer {
 		hero.clearContact();
 		if (now > next) {
 			gameObjects.add(new Point(hero.getX() + canvas.getWidth(), Math.random() * -50 - 25));
+			gameObjects.add(new Platform(hero.getX() + canvas.getWidth(),
+                                         Math.random() * -50 - 25,
+                                          Math.random()*100 + 50,
+                                          this));
 			next = now + 2000000000;
 		}
 
