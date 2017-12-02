@@ -8,7 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * Created by 18rmazeiks
  */
-public class Floor implements GameObject {
+public class Floor extends GameObject {
 	boolean flipped;
 
 	@Override
