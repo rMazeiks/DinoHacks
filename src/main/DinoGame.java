@@ -20,6 +20,8 @@ public class DinoGame extends AnimationTimer {
 	private final Canvas canvas;
 	private final Floor floor;
 	private final List<GameObject> gameObjects;
+	int count = 0;
+	long next = 0;
 	private Hero hero;
 
 	public DinoGame(Canvas canvas) {
@@ -28,7 +30,6 @@ public class DinoGame extends AnimationTimer {
 		gameObjects = new ArrayList<>();
 		floor = new Floor();
 		hero = new Hero(this);
-		gameObjects.add(hero);
 
 		this.canvas = canvas;
 
@@ -43,30 +44,28 @@ public class DinoGame extends AnimationTimer {
 		return hero;
 	}
 
-	int count = 0;
 	@Override
 	public void handle(long now) {
-	    count++;
-	    if(count%360==0) {
-            gameObjects.add(new Point(hero.getX() + Math.random() * 200 + 300, Math.random()*-50 - 25));
-        }
+		if (now > next) {
+			gameObjects.add(new Point(hero.getX() + canvas.getWidth(), Math.random() * -50 - 25));
+			next = now + 2000000000;
+		}
 
-       GraphicsContext graphics =  canvas.getGraphicsContext2D();
+		GraphicsContext graphics = canvas.getGraphicsContext2D();
 
-        graphics.setFill(new Color(1,1,1,1));
-        graphics.fillRect(0,-canvas.getHeight()/2, canvas.getWidth(), canvas.getHeight());
+		graphics.setFill(new Color(1, 1, 1, 1));
+		graphics.fillRect(0, -canvas.getHeight() / 2, canvas.getWidth(), canvas.getHeight());
 
-        graphics.save();
-        graphics.translate(100 - hero.getX(), 0);
+		graphics.save();
+		graphics.translate(100 - hero.getX(), 0);
 
+		hero.render(canvas);
 
-
-        for (int i = 0; i < gameObjects.size(); i++) {
+		for (int i = 0; i < gameObjects.size(); i++) {
 
 			GameObject obj = gameObjects.get(i);
 
-
-			if (!obj.interact(hero)) {
+			if (!obj.interact(hero, now)) {
 				gameObjects.remove(i);
 				i--;
 			} else {
@@ -75,10 +74,11 @@ public class DinoGame extends AnimationTimer {
 
 		}
 
+		graphics.restore();
 
+		floor.interact(hero, now);
+		floor.render(canvas);
 
-        graphics.restore();
-
-        floor.render(canvas);
+		hero.interact(null, now);
 	}
 }

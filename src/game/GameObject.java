@@ -13,5 +13,5 @@ public abstract class GameObject implements Renderable {
 	 * @param hero
 	 * @return
 	 */
-	public abstract boolean interact(Hero hero);
+	public abstract boolean interact(Hero hero, long now);
 }

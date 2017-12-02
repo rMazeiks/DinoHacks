@@ -13,7 +13,7 @@ public class Platform extends GameObject {
 	}
 
 	@Override
-	public boolean interact(Hero hero) {
+	public boolean interact(Hero hero, long now) {
 		return true;
 	}
 }

@@ -34,6 +34,7 @@ public class Main extends Application {
 		DinoGame runner = new DinoGame(canvas);
 		gameView.setOnKeyPressed(new DinoKeyHandler(runner));
 
+
 		runner.start();
 	}
 

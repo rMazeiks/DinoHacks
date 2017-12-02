@@ -10,11 +10,12 @@ import main.DinoGame;
  * Created by 18rmazeiks
  */
 public class Hero extends GameObject {
+	public static final double radius = 20;
 	private static Color fill = new Color(0, 0, 0, 1);
-	private static double radius = 20;
 	double x;
 	double y;
 	double velY;
+	int points = 0;
 	private DinoGame dinoGame;
 	private boolean touchingGround; // or platform
 
@@ -27,7 +28,6 @@ public class Hero extends GameObject {
 		this.x = x;
 		this.y = y;
 	}
-	int points = 0;
 
 	public double getY() {
 		return y;
@@ -55,34 +55,29 @@ public class Hero extends GameObject {
 	}
 
 	@Override
-	public boolean interact(Hero hero) {
-		if (!touchingFloor()) {
+	public boolean interact(Hero hero, long now) {
+		if (touchingGround) {
 			velY++;
 		}
-    		x = x+0.2;
+		x = ((double) now) / 2000000;
 		return true;
-	}
-
-	private boolean touchingFloor() {
-		int m = multiplier();
-		return velY * m > 0 && y * m > -radius;
 	}
 
 	private int multiplier() {
 		return dinoGame.getFloor().isFlipped() ? 1 : -1;
 	}
 
-	public void anounceContact()  {
+	public void anounceContact() {
 		touchingGround = true;
 	}
 
-	public void clearContact()  {
+	public void clearContact() {
 		touchingGround = false;
 
 	}
 
-	public void getPoint()  {
+	public void getPoint() {
 		points++;
-		System.out.println("points: "+points);
+		System.out.println("points: " + points);
 	}
 }

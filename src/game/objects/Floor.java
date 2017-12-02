@@ -10,12 +10,11 @@ import javafx.scene.paint.Color;
  */
 public class Floor extends GameObject {
 	private static final Color floorColor = new Color(0, 0, 0, 1);
+	private boolean flipped = false;
 
 	public boolean isFlipped() {
 		return flipped;
 	}
-
-	private boolean flipped = false;
 
 	@Override
 	public void render(Canvas canvas) {
@@ -27,7 +26,11 @@ public class Floor extends GameObject {
 	}
 
 	@Override
-	public boolean interact(Hero hero) {
+	public boolean interact(Hero hero, long now) {
+		int m = flipped ? 1 : -1;
+		if (hero.getVelY() * m > 0 && y * m > -Hero.radius) {
+			hero.anounceContact();
+		}
 		return true;
 	}
 }
