@@ -1,6 +1,7 @@
 package main;
 
 import game.GameObject;
+import game.objects.Cactus;
 import game.objects.Floor;
 import game.objects.Hero;
 import game.objects.Point;
@@ -49,6 +50,7 @@ public class DinoGame extends AnimationTimer {
 		hero.clearContact();
 		if (now > next) {
 			gameObjects.add(new Point(hero.getX() + canvas.getWidth(), Math.random() * -50 - 25));
+			gameObjects.add(new Cactus(hero.getX() + canvas.getWidth() + 200, (int)(Math.random()*70) + 20, ! floor.isFlipped()));
 			next = now + 2000000000;
 		}
 

@@ -104,4 +104,8 @@ public class Hero extends GameObject {
 		points++;
 		System.out.println("points: " + points);
 	}
+
+	public void gameOver(){
+		System.out.println("DIE");
+	}
 }
