@@ -1,11 +1,10 @@
 package main;
 
 import game.GameObject;
-import game.Hero;
+import game.objects.Hero;
 import game.objects.Floor;
-import javafx.concurrent.Task;
+import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +12,52 @@ import java.util.List;
 /**
  * Created by 18rmazeiks
  */
-public class DinoGame extends Task {
-	final GraphicsContext graphics;
+public class DinoGame extends AnimationTimer {
 
+	private final Canvas canvas;
+	private final Floor floor;
 	List<GameObject> gameObjects;
-
-	public Hero getHero() {
-		return hero;
-	}
-
 	Hero hero;
-
 
 	public DinoGame(Canvas canvas) {
 		super();
 
 		gameObjects = new ArrayList<>();
+		floor = new Floor();
+		hero = new Hero();
+		gameObjects.add(hero);
 
-		graphics = canvas.getGraphicsContext2D();
+		this.canvas = canvas;
+
+		canvas.getGraphicsContext2D().translate(0, canvas.getHeight() / 2);
+	}
+
+	public Hero getHero() {
+		return hero;
 	}
 
 	@Override
-	protected Object call() throws Exception {
-		gameObjects.add(new Floor());
-		hero = new Hero();
+	public void handle(long now) {
 
+		for (int i = 0; i < gameObjects.size(); i++) {
+			canvas.getGraphicsContext2D().save();
 
-		return null;
+			GameObject obj = gameObjects.get(i);
+			if (obj instanceof Floor) {
+			} else {
+				canvas.getGraphicsContext2D().translate(100 - hero.getX(), 0);
+			}
+
+			if (!obj.interact(hero)) {
+				gameObjects.remove(i);
+				i--;
+			} else {
+				obj.render(canvas);
+			}
+
+			canvas.getGraphicsContext2D().restore();
+		}
+
+		floor.render(canvas);
 	}
 }

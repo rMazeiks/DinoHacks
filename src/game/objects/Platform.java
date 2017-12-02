@@ -1,7 +1,6 @@
 package game.objects;
 
 import game.GameObject;
-import game.Hero;
 import javafx.scene.canvas.Canvas;
 
 /**
@@ -14,7 +13,7 @@ public class Platform extends GameObject {
 	}
 
 	@Override
-	public void interact(Hero hero) {
-
+	public boolean interact(Hero hero) {
+		return true;
 	}
 }
