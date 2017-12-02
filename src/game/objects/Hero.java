@@ -18,6 +18,7 @@ public class Hero extends GameObject {
 	int points = 0;
 	private DinoGame dinoGame;
 	private boolean touchingGround; // or platform
+	private boolean needsJump = false;
 
 	public Hero(DinoGame dinoGame) {
 		this(dinoGame, 0, 0);
@@ -27,6 +28,7 @@ public class Hero extends GameObject {
 		this.dinoGame = dinoGame;
 		this.x = x;
 		this.y = y;
+		velY = 0;
 	}
 
 	public double getY() {
@@ -45,11 +47,7 @@ public class Hero extends GameObject {
 	}
 
 	public void jump() {
-		System.out.println("I'm jumping!!!");
-		if (touchingGround) {
-			velY = -10 * multiplier();
-		}
-		//todo;
+		needsJump = true;
 	}
 
 	public double getX() {
@@ -64,7 +62,16 @@ public class Hero extends GameObject {
 		} else {
 			velY++;
 		}
+
+		if (needsJump) {
+			if (touchingGround) {
+				velY = -10;
+			}
+			needsJump = false;
+		}
+
 		x = ((double) now) / 2000000;
+		y += velY;
 
 		return true;
 	}

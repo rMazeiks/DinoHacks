@@ -27,8 +27,8 @@ public class Floor extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero, long now) {
-		int m = flipped ? 1 : -1;
-		if (hero.getVelY() * m > 0 && y * m > -Hero.radius) {
+		//int m = flipped ? 1 : -1;
+		if (hero.getVelY() >= 0 && hero.getY() > -Hero.radius - 1) {
 			hero.announceContact();
 		}
 		return true;
