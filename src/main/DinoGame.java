@@ -62,6 +62,9 @@ public class DinoGame extends AnimationTimer {
 		graphics.setFill(new Color(1, 1, 1, 1));
 		graphics.fillRect(0, -canvas.getHeight() / 2, canvas.getWidth(), canvas.getHeight());
 
+		graphics.setFill(new Color(0, 0, 0, 1));
+		graphics.fillText("" + hero.getPoints(), canvas.getWidth()/2, -canvas.getHeight()/3);
+
 		graphics.save();
 		graphics.translate(100 - hero.getX(), 0);
 

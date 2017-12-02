@@ -24,7 +24,7 @@ public class Point extends GameObject {
 	@Override
 	public boolean interact(Hero hero, long now) {
         if (Math.hypot(x-hero.getX(),y-hero.getY()) < 40) {
-            hero.getPoint();
+            hero.receivePoint();
             return false;
         }
 		return true;
