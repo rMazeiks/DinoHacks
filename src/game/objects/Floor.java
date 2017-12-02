@@ -29,7 +29,7 @@ public class Floor extends GameObject {
 	public boolean interact(Hero hero, long now) {
 		int m = flipped ? 1 : -1;
 		if (hero.getVelY() * m > 0 && y * m > -Hero.radius) {
-			hero.anounceContact();
+			hero.announceContact();
 		}
 		return true;
 	}

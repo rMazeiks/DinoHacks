@@ -46,7 +46,9 @@ public class Hero extends GameObject {
 
 	public void jump() {
 		System.out.println("I'm jumping!!!");
-
+		if (touchingGround) {
+			velY = -10 * multiplier();
+		}
 		//todo;
 	}
 
@@ -57,9 +59,13 @@ public class Hero extends GameObject {
 	@Override
 	public boolean interact(Hero hero, long now) {
 		if (touchingGround) {
+			velY = 0;
+			y = -radius;
+		} else {
 			velY++;
 		}
 		x = ((double) now) / 2000000;
+
 		return true;
 	}
 
@@ -67,7 +73,7 @@ public class Hero extends GameObject {
 		return dinoGame.getFloor().isFlipped() ? 1 : -1;
 	}
 
-	public void anounceContact() {
+	public void announceContact() {
 		touchingGround = true;
 	}
 

@@ -46,6 +46,7 @@ public class DinoGame extends AnimationTimer {
 
 	@Override
 	public void handle(long now) {
+		hero.clearContact();
 		if (now > next) {
 			gameObjects.add(new Point(hero.getX() + canvas.getWidth(), Math.random() * -50 - 25));
 			next = now + 2000000000;
