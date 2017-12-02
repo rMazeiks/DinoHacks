@@ -14,6 +14,6 @@ public class DinoKeyHandler implements EventHandler<KeyEvent> {
 
 	@Override
 	public void handle(KeyEvent event) {
-
+		System.out.println("testing...");
 	}
 }

@@ -2,7 +2,7 @@ package game.objects;
 
 import game.GameObject;
 import game.Hero;
-import game.Renderable;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -12,8 +12,12 @@ public class Floor extends GameObject {
 	boolean flipped;
 
 	@Override
-	public void render(GraphicsContext graphics) {
+	public void render(Canvas canvas) {
+		double half = canvas.getHeight() / 2;
 
+		final GraphicsContext graphics = canvas.getGraphicsContext2D();
+
+		graphics.fillRect(0, half, canvas.getWidth(), half * (flipped ? -1 : 1));
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package game.objects;
 
 import game.GameObject;
 import game.Hero;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -9,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Point extends GameObject {
 	@Override
-	public void render(GraphicsContext graphics) {
+	public void render(Canvas canvas) {
 
 	}
 

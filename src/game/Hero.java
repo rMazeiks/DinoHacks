@@ -1,5 +1,6 @@
 package game;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -10,7 +11,7 @@ public class Hero implements Renderable{
 	double velY;
 
 	@Override
-	public void render(GraphicsContext graphics) {
+	public void render(Canvas canvas) {
 
 	}
 }

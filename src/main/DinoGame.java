@@ -1,6 +1,8 @@
 package main;
 
 import game.GameObject;
+import game.Hero;
+import game.objects.Floor;
 import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,17 +17,22 @@ public class DinoGame extends Task {
 	final GraphicsContext graphics;
 
 	List<GameObject> gameObjects;
+	Hero hero;
 
 	public DinoGame(Canvas canvas) {
 		super();
 
 		gameObjects = new ArrayList<>();
+
 		graphics = canvas.getGraphicsContext2D();
-		canvas.setOnKeyPressed(new DinoKeyHandler(this));
 	}
 
 	@Override
 	protected Object call() throws Exception {
+		gameObjects.add(new Floor());
+		hero = new Hero();
+
+
 		return null;
 	}
 

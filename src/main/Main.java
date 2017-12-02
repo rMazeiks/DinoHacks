@@ -23,10 +23,13 @@ public class Main extends Application {
 
 		primaryStage.setTitle("Dino");
 
-		primaryStage.setScene(new Scene(root, 300, 275));
+		Scene gameView = new Scene(root, 300, 275);
+		primaryStage.setScene(gameView);
 		primaryStage.show();
 
 		DinoGame runner = new DinoGame(canvas);
 		runner.run();
+
+		gameView.setOnKeyPressed(new DinoKeyHandler(runner));
 	}
 }
