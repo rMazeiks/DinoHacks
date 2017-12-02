@@ -1,17 +1,21 @@
 package game;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Created by 18rmazeiks
  */
-public class Hero implements Renderable{
+public class Hero implements Renderable {
 	double x, y;
 	double velY;
 
 	@Override
 	public void render(Canvas canvas) {
 
+	}
+
+	public void jump() {
+		System.out.println("I'm jumping!!!");
+		//todo;
 	}
 }

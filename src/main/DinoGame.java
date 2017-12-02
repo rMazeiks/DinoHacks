@@ -17,7 +17,13 @@ public class DinoGame extends Task {
 	final GraphicsContext graphics;
 
 	List<GameObject> gameObjects;
+
+	public Hero getHero() {
+		return hero;
+	}
+
 	Hero hero;
+
 
 	public DinoGame(Canvas canvas) {
 		super();
@@ -34,9 +40,5 @@ public class DinoGame extends Task {
 
 
 		return null;
-	}
-
-	public void jump() {
-
 	}
 }
