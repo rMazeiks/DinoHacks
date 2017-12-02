@@ -10,7 +10,12 @@ import javafx.scene.paint.Color;
  */
 public class Floor extends GameObject {
 	private static final Color floorColor = new Color(0, 0, 0, 1);
-	boolean flipped = false;
+
+	public boolean isFlipped() {
+		return flipped;
+	}
+
+	private boolean flipped = false;
 
 	@Override
 	public void render(Canvas canvas) {
