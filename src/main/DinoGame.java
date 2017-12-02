@@ -1,8 +1,8 @@
 package main;
 
 import game.GameObject;
-import game.objects.Hero;
 import game.objects.Floor;
+import game.objects.Hero;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 
@@ -16,20 +16,24 @@ public class DinoGame extends AnimationTimer {
 
 	private final Canvas canvas;
 	private final Floor floor;
-	List<GameObject> gameObjects;
-	Hero hero;
+	private final List<GameObject> gameObjects;
+	private Hero hero;
 
 	public DinoGame(Canvas canvas) {
 		super();
 
 		gameObjects = new ArrayList<>();
 		floor = new Floor();
-		hero = new Hero();
+		hero = new Hero(this);
 		gameObjects.add(hero);
 
 		this.canvas = canvas;
 
 		canvas.getGraphicsContext2D().translate(0, canvas.getHeight() / 2);
+	}
+
+	public Floor getFloor() {
+		return floor;
 	}
 
 	public Hero getHero() {

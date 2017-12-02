@@ -4,6 +4,7 @@ import game.GameObject;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import main.DinoGame;
 
 /**
  * Created by 18rmazeiks
@@ -14,6 +15,18 @@ public class Hero extends GameObject {
 	double x;
 	double y;
 	double velY;
+	private DinoGame dinoGame;
+	private boolean touchingGround; // or platform
+
+	public Hero(DinoGame dinoGame) {
+		this(dinoGame, 0, 0);
+	}
+
+	public Hero(DinoGame dinoGame, double x, double y) {
+		this.dinoGame = dinoGame;
+		this.x = x;
+		this.y = y;
+	}
 
 	public double getY() {
 		return y;
@@ -32,6 +45,7 @@ public class Hero extends GameObject {
 
 	public void jump() {
 		System.out.println("I'm jumping!!!");
+
 		//todo;
 	}
 
@@ -41,6 +55,27 @@ public class Hero extends GameObject {
 
 	@Override
 	public boolean interact(Hero hero) {
+		if (!touchingFloor()) {
+			velY++;
+		}
+
 		return true;
+	}
+
+	private boolean touchingFloor() {
+		int m = multiplier();
+		return velY * m > 0 && y * m > -radius;
+	}
+
+	private int multiplier() {
+		return dinoGame.getFloor().isFlipped() ? 1 : -1;
+	}
+
+	public void anounceContact()  {
+		touchingGround = true;
+	}
+
+	public void clearContact()  {
+		touchingGround = false;
 	}
 }
