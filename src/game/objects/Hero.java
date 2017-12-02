@@ -27,6 +27,7 @@ public class Hero extends GameObject {
 		this.x = x;
 		this.y = y;
 	}
+	int points = 0;
 
 	public double getY() {
 		return y;
@@ -58,7 +59,7 @@ public class Hero extends GameObject {
 		if (!touchingFloor()) {
 			velY++;
 		}
-
+    		x = x+0.2;
 		return true;
 	}
 
@@ -77,5 +78,11 @@ public class Hero extends GameObject {
 
 	public void clearContact()  {
 		touchingGround = false;
+
+	}
+
+	public void getPoint()  {
+		points++;
+		System.out.println("points: "+points);
 	}
 }

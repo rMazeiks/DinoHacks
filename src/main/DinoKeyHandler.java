@@ -1,6 +1,7 @@
 package main;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -14,6 +15,8 @@ public class DinoKeyHandler implements EventHandler<KeyEvent> {
 
 	@Override
 	public void handle(KeyEvent event) {
-		System.out.println("testing...");
+	    if (event.getCode().equals(KeyCode.SPACE) || event.getCode().equals(KeyCode.UP)) {
+            dinoGame.getHero().jump();
+        }
 	}
 }
