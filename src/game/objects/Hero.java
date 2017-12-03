@@ -78,7 +78,7 @@ public class Hero extends GameObject {
 
 		if (needsJump) {
 			if (touchingGround) {
-				velY = m * -12;
+				velY = m * -16;
 			}
 			needsJump = false;
 		}
@@ -103,9 +103,5 @@ public class Hero extends GameObject {
 	public void receivePoint() {
 		points++;
 		System.out.println("points: " + points);
-	}
-
-	public void gameOver(){
-		System.out.println("DIE");
 	}
 }

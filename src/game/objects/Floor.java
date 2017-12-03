@@ -30,7 +30,7 @@ public class Floor extends GameObject {
 	public boolean interact(Hero hero, long now) {
 		if (now > next) {
 			flipped = !flipped;
-			next = now + 2000000000;
+			next = now + 10000000000L;
 		}
 
 		//int m = flipped ? 1 : -1;

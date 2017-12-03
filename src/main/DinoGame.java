@@ -12,15 +12,16 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by 18rmazeiks
  */
 public class DinoGame extends AnimationTimer {
-
 	private final Canvas canvas;
 	private final Floor floor;
 	private final List<GameObject> gameObjects;
+	public Function<Void, Void> onDie;
 	int count = 0;
 	long next = 0;
 	private Hero hero;
@@ -49,9 +50,13 @@ public class DinoGame extends AnimationTimer {
 	public void handle(long now) {
 		hero.clearContact();
 		if (now > next) {
-			gameObjects.add(new Point(hero.getX() + canvas.getWidth(), Math.random() * -50 - 25));
-			gameObjects.add(new Cactus(hero.getX() + canvas.getWidth() + 200, (int)(Math.random()*70) + 20, ! floor.isFlipped()));
-			next = now + 2000000000;
+			if (Math.random() > 0.5) {
+				gameObjects.add(new Point(hero.getX() + canvas.getWidth(), (Math.random() * -50 - 25) * (floor.isFlipped() ? -1 : 1)));
+			}
+			if (Math.random() > 0.5) {
+				gameObjects.add(new Cactus(this, hero.getX() + canvas.getWidth() + 200, (int) (Math.random() * 70) + 20, !floor.isFlipped()));
+			}
+			next = now + 1200000000;
 		}
 
 		GraphicsContext graphics = canvas.getGraphicsContext2D();
@@ -60,7 +65,7 @@ public class DinoGame extends AnimationTimer {
 		graphics.fillRect(0, -canvas.getHeight() / 2, canvas.getWidth(), canvas.getHeight());
 
 		graphics.setFill(new Color(0, 0, 0, 1));
-		graphics.fillText("" + hero.getPoints(), canvas.getWidth()/2, -canvas.getHeight()/3);
+		graphics.fillText("" + hero.getPoints(), canvas.getWidth() / 2, -canvas.getHeight() / 3);
 
 		graphics.save();
 		graphics.translate(100 - hero.getX(), 0);
@@ -87,4 +92,5 @@ public class DinoGame extends AnimationTimer {
 
 		hero.interact(null, now);
 	}
+
 }
