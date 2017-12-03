@@ -4,6 +4,7 @@ import game.GameObject;
 import game.objects.Cactus;
 import game.objects.Floor;
 import game.objects.Hero;
+import game.objects.Platform;
 import game.objects.Point;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -92,5 +93,4 @@ public class DinoGame extends AnimationTimer {
 
 		hero.interact(null, now);
 	}
-
 }
