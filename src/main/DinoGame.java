@@ -31,7 +31,7 @@ public class DinoGame extends AnimationTimer {
 		super();
 
 		gameObjects = new ArrayList<>();
-		floor = new Floor();
+		floor = new Floor(this);
 		hero = new Hero(this);
 
 		this.canvas = canvas;
